@@ -14,34 +14,39 @@ import java.util.List;
  */
 public class DistribucionPoison {
 
-    private List distro;
+    private final List<Float> distro;
+    private final Media media;
+    private final int tamañoDistribucion;
+    private float lambda;
 
     public DistribucionPoison() {
         distro = new ArrayList();
+        media = new Media(distro);
+        tamañoDistribucion = distro.size();
+        lambda = media.calculoMedia();
+
     }
 
-    public int getPoisson(float lambda) {
-        double L = Math.exp(-lambda);
-        double p = 1.0;
-        int k = 0;
-        do {
-            k++;
-            p *= Math.random();
-        } while (p > L);
-        return k - 1;
+    public double getPoisson() {
+        double e = Math.exp(-lambda);
+        int factorial = xFactorial(tamañoDistribucion);
+        double kElevado = Math.pow(lambda, tamañoDistribucion);
+        return ((e * kElevado) / factorial);
     }
 
-    public static void main(String[] args) {
-        int n = 0;
-        DistribucionPoison d = new DistribucionPoison();
-        double pago, total = 0;
-        String[] meses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Oct", "Nov", "Dic"};
-        for (int i = 0; i <= 11; i++) {
-            n = d.getPoisson(4);
-            pago = n * 800;
-            total = total + pago;
-            System.out.println("Accidentes en " + meses[i] + ": " + n);
+    public double getPoisson(int x, float nErroes, float probabilidad) {
+        int factorial = xFactorial(x);
+        lambda = (nErroes * (1 / probabilidad));
+        double e = Math.exp(-lambda);
+        double lambdaElevado = Math.pow(lambda, x);
+        return ((e * lambdaElevado) / factorial);
+    }
+
+    private int xFactorial(int numero) {
+        if (numero == 0) {
+            return 1;
+        } else {
+            return numero * xFactorial(numero - 1);
         }
-        System.out.println("Gasto Probable: " + total);
     }
 }
