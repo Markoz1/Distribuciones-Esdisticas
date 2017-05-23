@@ -5,7 +5,7 @@
  */
 package distribuciones;
 
-import java.util.ArrayList;
+import generadorMixto.Mixto;
 import java.util.List;
 
 /**
@@ -14,13 +14,19 @@ import java.util.List;
  */
 public class DistribucionPoison {
 
-    private final List<Float> distro;
+    private final List<Double> distro;
     private final Media media;
     private final int tamañoDistribucion;
-    private float lambda;
+    private double lambda;
+    private final Mixto mixto;
+    private int semilla;
+    private int multiplicador;
+    private int consAditiva;
+    private int modulo;
 
     public DistribucionPoison() {
-        distro = new ArrayList();
+        mixto = new Mixto(semilla, multiplicador, consAditiva, modulo);
+        distro = mixto.generar();
         media = new Media(distro);
         tamañoDistribucion = distro.size();
         lambda = media.calculoMedia();
