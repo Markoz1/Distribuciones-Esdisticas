@@ -35,6 +35,9 @@ module.exports.routes = {
   '/': {
     view: 'index'
   },
+  '/simulacion': {
+    view: 'distribuciones/inicio'
+  },
   '/distribuciones/poison': {
     controller: "Distribucion-poisonController", action: "create"
   }
