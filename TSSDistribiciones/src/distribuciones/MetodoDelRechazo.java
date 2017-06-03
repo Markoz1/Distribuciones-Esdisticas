@@ -21,7 +21,7 @@ public class MetodoDelRechazo {
     private final double b;
     private final double M;
 
-    public MedotoDelRechazo(double a, double b) {
+    public MetodoDelRechazo(double a, double b) {
         this.a = a;
         this.b = b;
         mixto = new Mixto(0, 0, 0, 0);
