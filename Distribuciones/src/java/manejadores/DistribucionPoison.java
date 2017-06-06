@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package distribuciones;
+package manejadores;
 
-import generadorMixto.Mixto;
+import generadores.Mixto;
 import java.util.List;
+import modelo.GeneradorCongruencialMixto;
 
 /**
  *
@@ -19,14 +20,11 @@ public class DistribucionPoison {
     private final int tamañoDistribucion;
     private double lambda;
     private final Mixto mixto;
-    private int semilla;
-    private int multiplicador;
-    private int consAditiva;
-    private int modulo;
+    private GeneradorCongruencialMixto generador;
 
     public DistribucionPoison() {
-        mixto = new Mixto(semilla, multiplicador, consAditiva, modulo);
-        distro = mixto.generar();
+        mixto = new Mixto();
+        distro = mixto.generar(generador);
         media = new Media(distro);
         tamañoDistribucion = distro.size();
         lambda = media.calculoMedia();
@@ -55,4 +53,5 @@ public class DistribucionPoison {
             return numero * xFactorial(numero - 1);
         }
     }
+    
 }
