@@ -118,3 +118,6 @@ nbproject
 .node_history
 /TSSDistribiciones/dist/
 /TSSDistribiciones/build/
+/Distribuciones/dist/
+/Distribuciones/build/
+TSSDistribiciones/src/distribuciones/MetodoDelRechazo.java

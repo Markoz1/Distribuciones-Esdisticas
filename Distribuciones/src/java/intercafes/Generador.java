@@ -3,12 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package distribuciones;
+package intercafes;
+
+import java.util.List;
 
 /**
  *
- * @author douglas
+ * @author Douglas
+ * @param <parametro>
  */
-public class DistribcionNormal {
-    
+public interface Generador<parametro> {
+    List<Double> generar(parametro p);
 }
