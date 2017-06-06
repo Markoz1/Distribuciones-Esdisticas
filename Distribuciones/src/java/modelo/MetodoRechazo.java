@@ -20,6 +20,9 @@ public class MetodoRechazo {
 
     private double M;
 
+    public MetodoRechazo() {
+    }
+
     public MetodoRechazo(double a, double b, double M) {
         this.a = a;
         this.b = b;

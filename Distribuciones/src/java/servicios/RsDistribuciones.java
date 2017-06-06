@@ -33,8 +33,7 @@ public class RsDistribuciones {
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public List<GeneradorCongruencialMixto> consultar() {
-        mixto.generar(varialbles.get(0));
-        return null;
+        return mixto.generar(varialbles.get(0));
     }
 
     @GET

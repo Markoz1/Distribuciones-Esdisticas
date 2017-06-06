@@ -22,6 +22,9 @@ public class GeneradorCongruencialMixto {
 
     private int modulo;
 
+    public GeneradorCongruencialMixto() {
+    }
+    
     public GeneradorCongruencialMixto(int semilla, int multiplicador, int consAditiva, int modulo) {
         this.semilla = semilla;
         this.multiplicador = multiplicador;
