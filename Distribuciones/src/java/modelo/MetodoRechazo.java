@@ -5,10 +5,13 @@
  */
 package modelo;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  *
  * @author Douglas
  */
+@XmlRootElement
 public class MetodoRechazo {
 
     private double a;
