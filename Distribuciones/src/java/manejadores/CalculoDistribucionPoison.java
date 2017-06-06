@@ -6,43 +6,54 @@
 package manejadores;
 
 import generadores.Mixto;
+import intercafes.Poisson;
 import java.util.List;
+import modelo.DistribucionPoisson;
 import modelo.GeneradorCongruencialMixto;
 
 /**
  *
  * @author Douglas
  */
-public class DistribucionPoison {
+public class CalculoDistribucionPoison implements Poisson<DistribucionPoisson>{
 
     private final List<Double> distro;
-    private final Media media;
     private final int tamañoDistribucion;
-    private double lambda;
     private final Mixto mixto;
     private GeneradorCongruencialMixto generador;
 
-    public DistribucionPoison() {
+    public CalculoDistribucionPoison() {
         mixto = new Mixto();
         distro = mixto.generar(generador);
-        media = new Media(distro);
         tamañoDistribucion = distro.size();
-        lambda = media.calculoMedia();
 
     }
 
-    public double getPoisson() {
-        double e = Math.exp(-lambda);
+    /**
+     *
+     * @param p
+     * @return
+     */
+    @Override
+    public double calculoPoisson2(DistribucionPoisson p) {
+        p.setLamda(distro.size());
+        double e = Math.exp(-p.getLamda());
         int factorial = xFactorial(tamañoDistribucion);
-        double kElevado = Math.pow(lambda, tamañoDistribucion);
+        double kElevado = Math.pow(p.getLamda(), tamañoDistribucion);
         return ((e * kElevado) / factorial);
     }
 
-    public double getPoisson(int x, float nErroes, float probabilidad) {
-        int factorial = xFactorial(x);
-        lambda = (nErroes * (1 / probabilidad));
-        double e = Math.exp(-lambda);
-        double lambdaElevado = Math.pow(lambda, x);
+    /**
+     *
+     * @param p
+     * @return
+     */
+    @Override
+    public double calculoPoisson(DistribucionPoisson p) {
+        int factorial = xFactorial(p.getX());
+        p.setLamda(p.getnErroes() * (1 / p.getProbabilidad()));
+        double e = Math.exp(-p.getLamda());
+        double lambdaElevado = Math.pow(p.getLamda(), p.getX());
         return ((e * lambdaElevado) / factorial);
     }
 

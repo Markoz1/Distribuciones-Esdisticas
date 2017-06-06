@@ -9,6 +9,16 @@ import intercafes.Generador;
 
 public class Mixto implements Generador<GeneradorCongruencialMixto>{
 
+    private List<GeneradorCongruencialMixto> mixto;
+
+    public List<GeneradorCongruencialMixto> getMixto() {
+        return mixto;
+    }
+
+    public void setMixto(List<GeneradorCongruencialMixto> mixto) {
+        this.mixto = mixto;
+    }
+
     /**
      * Método que devuelve los números aleatorios en un ArrayList de enteros en
      * caso de que cumpla con las propiedades de periodo completo, llena el
@@ -17,14 +27,15 @@ public class Mixto implements Generador<GeneradorCongruencialMixto>{
      * @return 
      */
     @Override
-    public List<Double> generar(GeneradorCongruencialMixto generador) {
+    public List generar(GeneradorCongruencialMixto generador) {
         int aux;
         int x = generador.getSemilla();
         ArrayList<Double> numeros = new ArrayList<>();
         numeros.add(generador.getSemilla() / 1.0);
         if (verificar(generador) == true) {
 //           for(int k=0;k<numeros){
-            aux = (generador.getMultiplicador() * generador.getSemilla() + generador.getConsAditiva()) % generador.getModulo();
+            aux = (generador.getMultiplicador() * generador.getSemilla() + 
+                    generador.getConsAditiva()) % generador.getModulo();
             //  numeros.add(aux);
             for (int i = 0; i < generador.getModulo() - 1; i++) {
                 aux = (generador.getMultiplicador() * x + generador.getConsAditiva()) % generador.getModulo();
@@ -33,8 +44,21 @@ public class Mixto implements Generador<GeneradorCongruencialMixto>{
             }
 //           }
         }
-
         return numeros;
+    }
+
+    @Override
+    public void modificar(GeneradorCongruencialMixto p) {
+        GeneradorCongruencialMixto aux = (GeneradorCongruencialMixto) generar(p);
+        aux.setConsAditiva(p.getConsAditiva());
+        aux.setModulo(p.getModulo());
+        aux.setMultiplicador(p.getMultiplicador());
+        aux.setSemilla(p.getSemilla());
+    }
+
+    @Override
+    public void eliminar(GeneradorCongruencialMixto p) {
+        
     }
 
     /**

@@ -5,15 +5,12 @@
  */
 package intercafes;
 
-import java.util.List;
-
 /**
  *
  * @author Douglas
  * @param <parametro>
  */
-public interface Generador<parametro> {
-    List<Double> generar(parametro p);
-    void modificar(parametro p);
-    void eliminar(parametro p);
+public interface Poisson<parametro> {
+   double calculoPoisson(parametro p);
+   double calculoPoisson2(parametro p);
 }
